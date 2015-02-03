@@ -1,6 +1,18 @@
 # ActsAsInheritable
 
-TODO: Write a gem description
+This is gem mean to be used with the [_Self-Referential Association_](#self-referential-association).
+
+### Self-Referential Association
+
+This is a code example on how to implement _Self-Referential Association_
+
+````ruby
+class Person < ActiveRecord::Base
+  belongs_to :parent, class: Person
+  has_many :children, class: Person, foreign_key: :parent_id
+  has_many :grandchildren, class: Person, through: :children, source: :children
+end
+````
 
 ## Installation
 
