@@ -24,4 +24,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "faker"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-nc"
+  spec.add_development_dependency "sqlite3", "~> 1.3"
+
+  spec.add_dependency "activesupport", "~> 4"
+  spec.add_dependency "activerecord", "~> 4", ">= 4.1.2"
+
 end

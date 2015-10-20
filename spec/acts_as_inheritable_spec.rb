@@ -1,3 +1,5 @@
+require 'spec_helper'
+require 'support/migrations'
 require 'support/factories'
 require 'support/models'
 

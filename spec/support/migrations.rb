@@ -1,7 +1,8 @@
-require 'database_helper'
+require 'support/database_helper'
 
 initialize_database do
-  create_table :persons do |t|
+
+  create_table :people do |t|
     t.string :first_name
     t.string :age
     t.string :favorite_color
@@ -9,6 +10,6 @@ initialize_database do
     t.string :soccer_team
   end
 
-  add_reference :persons, :parent, index: true
+  add_reference :people, :parent, index: true
 
 end
