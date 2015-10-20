@@ -11,4 +11,7 @@ class Person < ActiveRecord::Base
   belongs_to  :parent, class: Person
   has_many    :children, class: Person, foreign_key: :parent_id
 
+  # Callbacks
+  before_validation :inherit_attributes, on: :create
+
 end

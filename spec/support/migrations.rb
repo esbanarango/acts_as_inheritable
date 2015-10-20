@@ -2,7 +2,7 @@ require 'database_helper'
 
 initialize_database do
   create_table :persons do |t|
-    t.string :name
+    t.string :first_name
     t.string :age
     t.string :favorite_color
     t.string :last_name
