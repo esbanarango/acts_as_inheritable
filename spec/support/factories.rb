@@ -28,6 +28,20 @@ FactoryGirl.define do
         create_list :shoe, evaluator.number_of_shoes, person: person
       end
     end
+
+    trait :with_pictures do
+      transient do
+        number_of_pictures 4
+      end
+      after :create do |person, evaluator|
+        create_list :picture, evaluator.number_of_pictures, imageable: person
+      end
+    end
+  end
+
+  factory :picture do
+    url         { Faker::Internet.url }
+    place    { Faker::Address.city }
   end
 
   factory :toy do

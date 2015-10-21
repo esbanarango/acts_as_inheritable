@@ -28,4 +28,11 @@ initialize_database do
   end
 	add_foreign_key :shoes, :people
 
+  create_table :pictures do |t|
+    t.references 	:imageable, polymorphic: true, index: true
+    t.string 			:url
+    t.string			:place
+  end
+
+
 end
