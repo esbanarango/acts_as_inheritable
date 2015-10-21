@@ -1,6 +1,8 @@
 # ActsAsInheritable
 
-This is gem mean to be used with the [_Self-Referential Association_](#self-referential-association).
+[![Build Status](https://travis-ci.org/esbanarango/acts_as_inheritable.svg)](https://travis-ci.org/esbanarango/acts_as_inheritable) [![Test Coverage](https://codeclimate.com/github/esbanarango/acts_as_inheritable/badges/coverage.svg)](https://codeclimate.com/github/esbanarango/acts_as_inheritable/coverage) [![Code Climate](https://codeclimate.com/github/esbanarango/acts_as_inheritable/badges/gpa.svg)](https://codeclimate.com/github/esbanarango/acts_as_inheritable)
+
+This is gem mean to be used with the [_Self-Referential Association_](#self-referential-association), or with a model having a `parent` that share the inheritable attributes.
 
 ### Self-Referential Association
 
@@ -32,7 +34,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+
+class Person < ActiveRecord::Base
+
+  acts_as_inheritable
+
+  # Constants
+  INHERITABLE_ATTRIBUTES = %w(favorite_color last_name soccer_team)
+
+  # Associations
+  belongs_to  :parent, class_name: 'Person'
+  has_many    :children, class_name: 'Person', foreign_key: :parent_id
+
+  # Callbacks
+  before_validation :inherit_attributes, on: :create
+
+end
+
+````
 
 ## Contributing
 
