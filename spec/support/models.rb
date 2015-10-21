@@ -5,12 +5,24 @@ class Person < ActiveRecord::Base
 
   # Constants
   INHERITABLE_ATTRIBUTES = %w(favorite_color last_name soccer_team)
+  INHERITABLE_ASSOCIATIONS = %w(shoes)
 
   # Associations
   belongs_to  :parent, class_name: 'Person'
   has_many    :children, class_name: 'Person', foreign_key: :parent_id
+  has_many    :toys
+  has_many    :shoes
 
   # Callbacks
   before_validation :inherit_attributes, on: :create
+end
 
+class Toy < ActiveRecord::Base
+  # Associations
+  belongs_to  :owner, class_name: 'Person', foreign_key: :person_id
+end
+
+class Shoe < ActiveRecord::Base
+  # Associations
+  belongs_to  :person
 end

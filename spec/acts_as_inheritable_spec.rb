@@ -15,4 +15,15 @@ RSpec.describe "ActiveRecord::Base model with #acts_as_inheritable" do
     end
   end
 
+  describe '#inherit_relations' do
+    let(:person_parent) { create(:person, :with_shoes, number_of_shoes: 2) }
+    let!(:person){ create(:person, parent: person_parent) }
+
+    it 're-creates all the shoes from the parent' do
+      expect {
+        person.inherit_relations
+      }.to change(Shoe, :count).by(person_parent.shoes.count)
+    end
+  end
+
 end
