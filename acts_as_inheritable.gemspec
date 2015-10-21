@@ -20,9 +20,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "factory_girl", "~> 4.5, >= 4.5.0"
-  spec.add_development_dependency "faker", "~> 1.5, >= 1.5.0"
-  spec.add_development_dependency "rspec", "~> 3.3, >= 3.3.0"
+  spec.add_development_dependency "factory_girl", "~> 4.5", ">= 4.5.0"
+  spec.add_development_dependency "faker", "~> 1.5", ">= 1.5.0"
+  spec.add_development_dependency "rspec", "~> 3.3", ">= 3.3.0"
   spec.add_development_dependency "rspec-nc", "~> 0.2.0"
   spec.add_development_dependency "sqlite3", "~> 1.3"
   spec.add_development_dependency "nyan-cat-formatter", "~> 0.11"
