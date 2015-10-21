@@ -16,7 +16,27 @@ RSpec.describe "ActiveRecord::Base model with #acts_as_inheritable" do
   end
 
   describe '#inherit_relations' do
+  	describe '`belongs_to` associations' do
+	    let(:person_parent) { create(:person, :with_clan) }
+	    let!(:person){ create(:person, parent: person_parent) }
+
+	    it 're-creates the clan from the parent' do
+	      expect {
+	        person.inherit_relations
+	      }.to change(Clan, :count).by(1)
+	      expect(person.clan.id).to_not eq person_parent.clan.id
+	    end
+  	end
   	describe '`has_many` associations' do
+
+	    let(:person_parent) { create(:person, :with_shoes, number_of_shoes: 2) }
+	    let!(:person){ create(:person, parent: person_parent) }
+
+	    it 're-creates all the shoes from the parent' do
+	      expect {
+	        person.inherit_relations
+	      }.to change(Shoe, :count).by(person_parent.shoes.count)
+	    end
 
   		context 'when association is polymorphic' do
 		    let(:person_parent) { create(:person, :with_pictures, number_of_pictures: 2) }
@@ -29,14 +49,16 @@ RSpec.describe "ActiveRecord::Base model with #acts_as_inheritable" do
 		    end
   		end
 
-	    let(:person_parent) { create(:person, :with_shoes, number_of_shoes: 2) }
-	    let!(:person){ create(:person, parent: person_parent) }
+			context 'when association is polymorphic' do
+		    let(:person_parent) { create(:person, :with_pictures, number_of_pictures: 2) }
+		    let!(:person){ create(:person, parent: person_parent) }
 
-	    it 're-creates all the shoes from the parent' do
-	      expect {
-	        person.inherit_relations
-	      }.to change(Shoe, :count).by(person_parent.shoes.count)
-	    end
+		    it 're-creates all the pictures from the parent' do
+		      expect {
+		        person.inherit_relations
+		      }.to change(Picture, :count).by(person_parent.pictures.count)
+		    end
+  		end
   	end
   end
 end

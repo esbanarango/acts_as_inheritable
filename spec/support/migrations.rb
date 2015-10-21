@@ -34,5 +34,10 @@ initialize_database do
     t.string			:place
   end
 
+  create_table :clans do |t|
+    t.string 			:name
+  end
+  add_reference :people, :clan, index: true
+  add_foreign_key :people, :clans
 
 end

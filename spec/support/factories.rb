@@ -11,6 +11,10 @@ FactoryGirl.define do
       parent { create(:person) }
     end
 
+    trait :with_clan do
+      clan { create(:clan) }
+    end
+
     trait :with_toys do
       transient do
         number_of_toys 4
@@ -39,8 +43,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :clan do
+    name     { Faker::Lorem.word }
+  end
+
   factory :picture do
-    url         { Faker::Internet.url }
+    url      { Faker::Internet.url }
     place    { Faker::Address.city }
   end
 
