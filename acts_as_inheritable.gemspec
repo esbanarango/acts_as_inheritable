@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Esteban Arango Medina"]
   spec.email         = ["marranoparael31@gmail.com"]
   spec.summary       = %q{Inheritable behavior for models with parent.}
-  spec.description   = %q{}
-  spec.homepage      = ""
+  spec.description   = %q{This gem will let you inherit any attribute or relation from the parent model.}
+  spec.homepage      = "https://github.com/esbanarango/acts_as_inheritable"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
