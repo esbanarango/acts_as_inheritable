@@ -1,6 +1,6 @@
 # ActsAsInheritable
 
-[![Build Status](https://travis-ci.org/esbanarango/acts_as_inheritable.svg)](https://travis-ci.org/esbanarango/acts_as_inheritable) [![Test Coverage](https://codeclimate.com/github/esbanarango/acts_as_inheritable/badges/coverage.svg)](https://codeclimate.com/github/esbanarango/acts_as_inheritable/coverage) [![Code Climate](https://codeclimate.com/github/esbanarango/acts_as_inheritable/badges/gpa.svg)](https://codeclimate.com/github/esbanarango/acts_as_inheritable)
+[![Gem Version](https://badge.fury.io/rb/acts_as_inheritable.svg)](https://badge.fury.io/rb/acts_as_inheritable) [![Build Status](https://travis-ci.org/esbanarango/acts_as_inheritable.svg)](https://travis-ci.org/esbanarango/acts_as_inheritable) [![Test Coverage](https://codeclimate.com/github/esbanarango/acts_as_inheritable/badges/coverage.svg)](https://codeclimate.com/github/esbanarango/acts_as_inheritable/coverage) [![Code Climate](https://codeclimate.com/github/esbanarango/acts_as_inheritable/badges/gpa.svg)](https://codeclimate.com/github/esbanarango/acts_as_inheritable)
 
 This is gem mean to be used with the [_Self-Referential Association_](#self-referential-association), or with a model having a `parent` that share the inheritable attributes. This will let you inherit any __attribute__ or __relation__ from the _parent_ model.
 
