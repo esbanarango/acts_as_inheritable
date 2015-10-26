@@ -15,6 +15,10 @@ FactoryGirl.define do
       clan { create(:clan) }
     end
 
+    trait :with_pet do
+      pet { create(:pet) }
+    end
+
     trait :with_toys do
       transient do
         number_of_toys 4
@@ -45,6 +49,11 @@ FactoryGirl.define do
 
   factory :clan do
     name     { Faker::Lorem.word }
+  end
+
+  factory :pet do
+    name     { Faker::Lorem.word }
+    breed     { Faker::Lorem.word }
   end
 
   factory :picture do

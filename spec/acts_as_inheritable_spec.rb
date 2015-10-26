@@ -9,13 +9,43 @@ RSpec.describe "ActiveRecord::Base model with #acts_as_inheritable" do
     let(:person){ create(:person, :with_parent, favorite_color: nil, last_name: nil, soccer_team: nil) }
     let!(:person_parent) { person.parent }
     it 'inherits values from his parent' do
+      person.inherit_attributes
       expect(person.favorite_color).to eq person_parent.favorite_color
       expect(person.last_name).to eq person_parent.last_name
       expect(person.soccer_team).to eq person_parent.soccer_team
     end
+    context 'when `force` is set to true' do
+      let(:person){ create(:person, :with_parent, favorite_color: nil, last_name: 'r3d3 restrepo', soccer_team: 'verdolaga') }
+      let!(:person_parent) { person.parent }
+      it 'inherits values from his parent even if those attributes have a value' do
+        person.inherit_attributes true
+        expect(person.favorite_color).to eq person_parent.favorite_color
+        expect(person.last_name).to eq person_parent.last_name
+        expect(person.soccer_team).to eq person_parent.soccer_team
+      end
+      context 'and `not_force_for` has attributes' do
+        it 'inherits values from his parent even if those attributes have a value but exclude then ones on `not_force_for`' do
+          person.inherit_attributes true, ['soccer_team']
+          expect(person.favorite_color).to eq person_parent.favorite_color
+          expect(person.last_name).to eq person_parent.last_name
+          expect(person.soccer_team).to eq 'verdolaga'
+        end
+      end
+    end
   end
 
   describe '#inherit_relations' do
+    describe '`has_one` associations' do
+      let(:person_parent) { create(:person, :with_pet) }
+      let!(:person){ create(:person, parent: person_parent) }
+
+      it 're-creates the pet from the parent' do
+        expect {
+          person.inherit_relations
+        }.to change(Pet, :count).by(1)
+        expect(person.pet.id).to_not eq person_parent.pet.id
+      end
+    end
   	describe '`belongs_to` associations' do
 	    let(:person_parent) { create(:person, :with_clan) }
 	    let!(:person){ create(:person, parent: person_parent) }

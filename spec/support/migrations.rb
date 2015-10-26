@@ -40,4 +40,11 @@ initialize_database do
   add_reference :people, :clan, index: true
   add_foreign_key :people, :clans
 
+  create_table :pets do |t|
+    t.belongs_to :person, index: true
+    t.string :name
+    t.string :breed
+    t.timestamps null: false
+  end
+
 end
