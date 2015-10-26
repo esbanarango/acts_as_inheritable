@@ -5,7 +5,7 @@ class Person < ActiveRecord::Base
 
   # Constants
   INHERITABLE_ATTRIBUTES = %w(favorite_color last_name soccer_team)
-  INHERITABLE_ASSOCIATIONS = %w(shoes pictures clan)
+  INHERITABLE_ASSOCIATIONS = %w(shoes pictures clan toys)
 
   # Associations
   belongs_to  :parent, class_name: 'Person'

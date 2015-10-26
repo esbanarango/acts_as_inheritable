@@ -43,12 +43,19 @@ module ActsAsInheritable
 
       def verify_parent_name(new_relation, model_parent)
         parent_name = model_parent.class.to_s.downcase
+        return parent_name if new_relation.respond_to?(parent_name)
         many_and_one_associations = model_parent.class.reflect_on_all_associations.select { |a| a.macro != :belongs_to }
         many_and_one_associations.each do |association|
           if association.klass.to_s.downcase == new_relation.class.to_s.downcase && association.options.has_key?(:as)
             as = association.options[:as].to_s
             parent_name = as if new_relation.respond_to?(as) && !new_relation.respond_to?(parent_name)
             break
+          end
+        end
+        # Relations has a diffeent name
+        unless new_relation.respond_to?(parent_name)
+          new_relation.class.reflections.keys.each do |reflection|
+            parent_name = reflection if new_relation.class.reflections[reflection].class_name == model_parent.class.name
           end
         end
         parent_name
