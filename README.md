@@ -103,8 +103,13 @@ son.pet.inspect # => #<Pet id: 2, person_id: 2, name: "Mango", breed: "Golden Re
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/acts_as_inheritable/fork )
+1. Fork it ( https://github.com/esbanarango/acts_as_inheritable/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## Author
+
+This was written by [Esteban Arango Medina](http://esbanarango.com) while working at [Blue Sky Cards](https://www.blueskycards.com/).
+>Thanks to [@danielosorio83](https://github.com/danielosorio83) who also wrote part of the logic for this gem.
