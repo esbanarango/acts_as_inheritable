@@ -23,10 +23,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "factory_girl", "~> 4.5", ">= 4.5.0"
   spec.add_development_dependency "faker", "~> 1.5", ">= 1.5.0"
   spec.add_development_dependency "rspec", "~> 3.3", ">= 3.3.0"
-  spec.add_development_dependency "rspec-nc", "~> 0.2.0"
+  spec.add_development_dependency "rspec-nc", "~> 0.2", ">= 0.2.0"
   spec.add_development_dependency "sqlite3", "~> 1.3"
   spec.add_development_dependency "nyan-cat-formatter", "~> 0.11"
-  spec.add_development_dependency "codeclimate-test-reporter", "~> 0.4.3"
+  spec.add_development_dependency "codeclimate-test-reporter", "~> 0.4", ">= 0.4.3"
 
   spec.add_dependency "activesupport", "~> 4"
   spec.add_dependency "activerecord", "~> 4", ">= 4.1.2"
