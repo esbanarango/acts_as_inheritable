@@ -5,6 +5,27 @@ require 'support/models'
 
 RSpec.describe "ActiveRecord::Base model with #acts_as_inheritable" do
 
+  describe 'describe `acts_as_inheritable` setup' do
+    context 'when `acts_as_inheritable` is defined without options' do
+      it 'raises an `ArgumentError`' do
+        expect{
+          class Person < ActiveRecord::Base
+            acts_as_inheritable
+          end
+        }.to raise_error(ArgumentError)
+      end
+    end
+    context 'when `acts_as_inheritable` is defined with empty options' do
+      it 'raises an `ArgumentError`' do
+        expect{
+          class Person < ActiveRecord::Base
+            acts_as_inheritable{attributes:[],associations:[]}
+          end
+        }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
   describe '#inherit_attributes' do
     let(:person){ create(:person, :with_parent, favorite_color: nil, last_name: nil, soccer_team: nil) }
     let!(:person_parent) { person.parent }

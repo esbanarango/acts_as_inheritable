@@ -1,11 +1,9 @@
 require 'acts_as_inheritable'
 
 class Person < ActiveRecord::Base
-  acts_as_inheritable
 
-  # Constants
-  INHERITABLE_ATTRIBUTES = %w(favorite_color last_name soccer_team)
-  INHERITABLE_ASSOCIATIONS = %w(shoes pictures clan toys pet)
+  acts_as_inheritable attributes: %w(favorite_color last_name soccer_team),
+                      associations: %w(shoes pictures clan toys pet)
 
   # Associations
   belongs_to  :parent, class_name: 'Person'

@@ -2,7 +2,15 @@ require 'active_record'
 require "acts_as_inheritable/version"
 
 module ActsAsInheritable
-  def acts_as_inheritable
+  def acts_as_inheritable(options)
+    raise ArgumentError, "Hash expected, got #{options.class.name}" if !options.is_a?(Hash)
+    raise ArgumentError, "Empty options" if options[:attributes].empty? && options[:associations].empty?
+
+    class_attribute :inheritable_configuration
+
+    self.inheritable_configuration = {}
+    self.inheritable_configuration.merge!(options)
+
     class_eval do
       def has_parent?
         parent.present?
@@ -12,8 +20,8 @@ module ActsAsInheritable
       # relations defined on `INHERITABLE_ASSOCIATIONS`. For each instance on
       # each relation it re-creates it.
       def inherit_relations(model_parent = send(:parent), current = self)
-        if model_parent && model_parent.class.const_defined?("INHERITABLE_ASSOCIATIONS")
-          model_parent.class::INHERITABLE_ASSOCIATIONS.each do |relation|
+        if model_parent && model_parent.class.method_defined?(:inheritable_configuration)
+          model_parent.class::inheritable_configuration[:associations].each do |relation|
             parent_relation = model_parent.send(relation)
             relation_instances = parent_relation.respond_to?(:each) ? parent_relation : [parent_relation].compact
             relation_instances.each do |relation_instance|
@@ -64,7 +72,7 @@ module ActsAsInheritable
       def inherit_attributes(force = false, not_force_for=[])
         if has_parent?
           # Attributes
-          self.class::INHERITABLE_ATTRIBUTES.each do |attribute|
+          self.class.inheritable_configuration[:attributes].each do |attribute|
             current_val = send(attribute)
             if (force && !not_force_for.include?(attribute)) || current_val.blank?
               send("#{attribute}=", parent.send(attribute))

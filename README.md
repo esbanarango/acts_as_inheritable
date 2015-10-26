@@ -37,11 +37,9 @@ Or install it yourself as:
 ```ruby
 
 class Person < ActiveRecord::Base
-  acts_as_inheritable
 
-  # Constants
-  INHERITABLE_ATTRIBUTES = %w(favorite_color last_name soccer_team)
-  INHERITABLE_ASSOCIATIONS = %w(shoes pictures clan)
+  acts_as_inheritable attributes: %w(favorite_color last_name soccer_team),
+                      associations: %w(shoes pictures clan)
 
   # Associations
   belongs_to  :parent, class_name: 'Person'
@@ -80,10 +78,8 @@ By default this method  will only set values that are [blank?](http://api.rubyon
 ```ruby
 
 class Person < ActiveRecord::Base
-  acts_as_inheritable
 
-  # Constants
-  INHERITABLE_ASSOCIATIONS = %w(pet)
+  acts_as_inheritable associations: %w(pet)
 
   # Associations
   has_one     :pet
