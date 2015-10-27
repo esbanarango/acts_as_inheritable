@@ -4,7 +4,7 @@ require "acts_as_inheritable/version"
 module ActsAsInheritable
   def acts_as_inheritable(options)
     raise ArgumentError, "Hash expected, got #{options.class.name}" if !options.is_a?(Hash)
-    raise ArgumentError, "Empty options" if options[:attributes].empty? && options[:associations].empty?
+    raise ArgumentError, "Empty options" if options[:attributes].blank? && options[:associations].blank?
 
     class_attribute :inheritable_configuration
 
