@@ -33,6 +33,7 @@ Or install it yourself as:
     $ gem install acts_as_inheritable
 
 ## Usage
+You can enable ActsAsInheritable by adding `acts_as_inheritable` into your model. You need to define at least one option, either `attributes` or `associations`. Those options are _arrays_ containing the atrributes names or the associations names.
 
 ```ruby
 
@@ -67,13 +68,16 @@ son.favorite_color # => Green
 By adding `acts_as_inheritable` to your models you will have access to these methods:
 
 #### inherit_attributes
+> Signature `inherit_attributes(force = false, not_force_for=[])`
+
 By default this method  will only set values that are [blank?](http://api.rubyonrails.org/classes/Object.html#method-i-blank-3F).
 
-##### params
+###### params
   - `force`: Default to true. Set the attribute even if it's _present_.
   - `not_force_for`: Default to empty array. When setting `force` to _true_, you can also specify the attributes you don't want to overwrite.
 
 #### inherit_relations
+> Signature `inherit_relations(model_parent = send(:parent), current = self)`
 
 ```ruby
 
