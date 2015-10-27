@@ -62,7 +62,7 @@ module ActsAsInheritable
         end
         # Relations has a diffeent name
         unless new_relation.respond_to?(parent_name)
-          new_relation.class.reflections.keys.each do |reflection|
+          new_relation.class.reflections.each_key  do |reflection|
             parent_name = reflection if new_relation.class.reflections[reflection].class_name == model_parent.class.name
           end
         end
