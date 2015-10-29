@@ -1,10 +1,10 @@
 require 'active_record'
-require "acts_as_inheritable/version"
+require 'acts_as_inheritable/version'
 
 module ActsAsInheritable
   def acts_as_inheritable(options)
-    raise ArgumentError, "Hash expected, got #{options.class.name}" if !options.is_a?(Hash)
-    raise ArgumentError, "Empty options" if options[:attributes].blank? && options[:associations].blank?
+    fail ArgumentError, "Hash expected, got #{options.class.name}" unless options.is_a?(Hash)
+    fail ArgumentError, 'Empty options' if options[:attributes].blank? && options[:associations].blank?
 
     class_attribute :inheritable_configuration
 
@@ -20,8 +20,8 @@ module ActsAsInheritable
       # relations defined on `INHERITABLE_ASSOCIATIONS`. For each instance on
       # each relation it re-creates it.
       def inherit_relations(model_parent = send(:parent), current = self)
-        if model_parent && model_parent.class.method_defined?(:inheritable_configuration) && model_parent.class::inheritable_configuration[:associations]
-          model_parent.class::inheritable_configuration[:associations].each do |relation|
+        if model_parent && model_parent.class.method_defined?(:inheritable_configuration) && model_parent.class.inheritable_configuration[:associations]
+          model_parent.class.inheritable_configuration[:associations].each do |relation|
             parent_relation = model_parent.send(relation)
             relation_instances = parent_relation.respond_to?(:each) ? parent_relation : [parent_relation].compact
             relation_instances.each do |relation_instance|
@@ -55,22 +55,25 @@ module ActsAsInheritable
         return parent_name if new_relation.respond_to?(parent_name)
         many_and_one_associations = model_parent.class.reflect_on_all_associations.select { |a| a.macro != :belongs_to }
         many_and_one_associations.each do |association|
-          if association.klass.to_s.downcase == new_relation.class.to_s.downcase && association.options.has_key?(:as)
-            as = association.options[:as].to_s
-            parent_name = as if new_relation.respond_to?(as) && !new_relation.respond_to?(parent_name)
+          next unless association.klass.to_s.downcase == new_relation.class.to_s.downcase && association.options.key?(:as)
+          as = association.options[:as].to_s
+          if new_relation.respond_to?(as) && !new_relation.respond_to?(parent_name)
+            parent_name = as
             break
           end
         end
         # Relations has a diffeent name
         unless new_relation.respond_to?(parent_name)
-          new_relation.class.reflections.each_key  do |reflection|
-            parent_name = reflection if new_relation.class.reflections[reflection].class_name == model_parent.class.name
+          new_relation.class.reflections.each_key do |reflection|
+            next unless new_relation.class.reflections[reflection].class_name == model_parent.class.name
+            parent_name = reflection
+            break
           end
         end
         parent_name
       end
 
-      def inherit_attributes(force = false, not_force_for=[])
+      def inherit_attributes(force = false, not_force_for = [])
         if has_parent? && self.class.inheritable_configuration[:attributes]
           # Attributes
           self.class.inheritable_configuration[:attributes].each do |attribute|
@@ -83,6 +86,7 @@ module ActsAsInheritable
       end
     end
   end
+
   if defined?(ActiveRecord)
     # Extend ActiveRecord's functionality
     ActiveRecord::Base.send :extend, ActsAsInheritable
