@@ -101,6 +101,19 @@ son.pet.inspect # => #<Pet id: 2, person_id: 2, name: "Mango", breed: "Golden Re
 
 ````
 
+### Handling your own `dup`
+
+By default new relations are _duplicated_ using [dup](http://ruby-doc.org/core-2.2.3/Object.html#method-i-dup), which produces a shallow copy of the object. But you can also handle this as you want by defining a `duplicate!` method.
+
+
+## Testing
+
+All tests follow the RSpec format and are located in the spec directory. They can be run with:
+
+````bash
+$ rspec
+````
+
 ## Contributing
 
 1. Fork it ( https://github.com/esbanarango/acts_as_inheritable/fork )
