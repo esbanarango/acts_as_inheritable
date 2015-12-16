@@ -20,8 +20,8 @@ module ActsAsInheritable
       # relations defined on `INHERITABLE_ASSOCIATIONS`. For each instance on
       # each relation it re-creates it.
       def inherit_relations(model_parent = send(:parent), current = self)
-        if model_parent && model_parent.class.method_defined?(:inheritable_configuration) && model_parent.class.inheritable_configuration[:associations]
-          model_parent.class.inheritable_configuration[:associations].each do |relation|
+        if model_parent && current.class.method_defined?(:inheritable_configuration) && current.class.inheritable_configuration[:associations]
+          current.class.inheritable_configuration[:associations].each do |relation|
             parent_relation = model_parent.send(relation)
             relation_instances = parent_relation.respond_to?(:each) ? parent_relation : [parent_relation].compact
             relation_instances.each do |relation_instance|
