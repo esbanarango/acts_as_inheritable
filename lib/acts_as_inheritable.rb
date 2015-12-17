@@ -91,5 +91,4 @@ module ActsAsInheritable
     # Extend ActiveRecord's functionality
     ActiveRecord::Base.send :extend, ActsAsInheritable
   end
-
 end
