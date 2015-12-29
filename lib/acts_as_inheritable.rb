@@ -73,13 +73,17 @@ module ActsAsInheritable
         parent_name
       end
 
-      def inherit_attributes(force = false, not_force_for = [])
+      def inherit_attributes(force = false, not_force_for = [], use_update = false)
         if has_parent? && self.class.inheritable_configuration[:attributes]
           # Attributes
           self.class.inheritable_configuration[:attributes].each do |attribute|
             current_val = send(attribute)
             if (force && !not_force_for.include?(attribute)) || current_val.blank?
-              send("#{attribute}=", parent.send(attribute))
+              if use_update
+                update_attributes(attribute => parent.send(attribute))
+              else
+                send("#{attribute}=", parent.send(attribute))
+              end
             end
           end
         end
