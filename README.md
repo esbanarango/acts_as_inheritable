@@ -68,14 +68,14 @@ son.favorite_color # => Green
 By adding `acts_as_inheritable` to your models you will have access to these methods:
 
 #### inherit_attributes
-> Signature `inherit_attributes(force = false, not_force_for = [], use_update = false)`
+> Signature `inherit_attributes(force = false, not_force_for = [], method_to_update = nil)`
 
 By default this method  will only set values that are [blank?](http://api.rubyonrails.org/classes/Object.html#method-i-blank-3F).
 
 ###### params
   - `force`: Default to true. Set the attribute even if it's _present_.
   - `not_force_for`: Default to empty array. When setting `force` to _true_, you can also specify the attributes you don't want to overwrite.
-  - `use_update`: Default to false. Uses the `update_attributes` method instead of the normal asignation (`"#{attribute}="`). This is useful if you're using __inherit_attributes__  inside a `after_save` callback for example.
+  - `method_to_update`: Default to nil. Uses the specified method (`update_attributes` or `update_columns`) instead of the normal asignation (`"#{attribute}="`). This is useful if you're using __inherit_attributes__  inside an `after_save` callback or if you want to skip validations for example.
 
 #### inherit_relations
 > Signature `inherit_relations(model_parent = send(:parent), current = self)`
