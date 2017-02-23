@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "factory_girl", "~> 4.5", ">= 4.5.0"
+  spec.add_development_dependency "factory_girl", ">= 4.8.0"
   spec.add_development_dependency "faker", "~> 1.5", ">= 1.5.0"
   spec.add_development_dependency "rspec", "~> 3.3", ">= 3.3.0"
   spec.add_development_dependency "rspec-nc", "~> 0.2", ">= 0.2.0"
@@ -28,6 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "nyan-cat-formatter", "~> 0.11"
   spec.add_development_dependency "codeclimate-test-reporter", "~> 0.4", ">= 0.4.3"
 
-  spec.add_runtime_dependency 'activesupport', '~> 4.2.2', '>= 4.2.2'
-  spec.add_runtime_dependency 'activerecord', '~> 4.2.2', '>= 4.2.2'
+  spec.add_runtime_dependency 'activesupport', '~> 5.0.1', '>= 5.0.1'
+  spec.add_runtime_dependency 'activerecord', '~> 5.0.1', '>= 5.0.1'
 end
