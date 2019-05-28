@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/acts_as_inheritable.svg)](https://badge.fury.io/rb/acts_as_inheritable) [![Build Status](https://travis-ci.org/esbanarango/acts_as_inheritable.svg)](https://travis-ci.org/esbanarango/acts_as_inheritable) [![Test Coverage](https://codeclimate.com/github/esbanarango/acts_as_inheritable/badges/coverage.svg)](https://codeclimate.com/github/esbanarango/acts_as_inheritable/coverage) [![security](https://hakiri.io/github/esbanarango/acts_as_inheritable/master.svg)](https://hakiri.io/github/esbanarango/acts_as_inheritable/master)
 
-_Acts As Inheritable_ is a Ruby Gem specifically written for Rails/ActiveRecord models. It is meant to be used with the [_Self-Referential Association_](#self-referential-association), or with a model having a `parent` that share the inheritable attributes. This will let you inherit any __attribute__ or __relation__ from the _parent_ model.
+_Acts As Inheritable_ is a Ruby Gem specifically written for Rails/ActiveRecord models. It is meant to be used with the [_Self-Referential Association_](#self-referential-association), or with a model having a `parent` that shares the inheritable attributes. This will let you inherit any __attribute__ or __relation__ from the _parent_ model.
 
 ### Self-Referential Association
 
@@ -33,7 +33,7 @@ Or install it yourself as:
     $ gem install acts_as_inheritable
 
 ## Usage
-You can enable ActsAsInheritable by adding `acts_as_inheritable` into your model. You need to define at least one option, either `attributes` or `associations`. Those options are _arrays_ containing the atrributes names or the associations names.
+You can enable _ActsAsInheritable_ by adding `acts_as_inheritable` into your model. You need to define at least one option, either `attributes` or `associations`. Those options are _arrays_ containing the atrributes names or the associations names.
 
 ```ruby
 
@@ -134,4 +134,4 @@ Support this project and [others by esbanarango][gratipay-esbanarango] via [grat
 ## Author
 
 This was written by [Esteban Arango Medina](http://esbanarango.com) while working at [Blue Sky Cards](https://www.blueskycards.com/).
->Thanks to [@danielosorio83](https://github.com/danielosorio83) who also wrote part of the logic for this gem.
+> Thanks to [@danielosorio83](https://github.com/danielosorio83) who also wrote part of the logic for this gem.
